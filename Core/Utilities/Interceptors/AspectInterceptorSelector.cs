@@ -15,8 +15,8 @@ namespace Core.Utilities.Interceptors
         {
             var classAttributes = type.GetCustomAttributes<MethodInterceptionBaseAttribute>
                 (true).ToList();
-            var methodAttributes = type.GetMethod(method.Name)
-                .GetCustomAttributes<MethodInterceptionBaseAttribute>(true);
+            var methodAttributes = type.GetMethod(method.Name, method.GetParameters().Select(p => p.ParameterType).ToArray()).GetCustomAttributes<MethodInterceptionBaseAttribute>(true);
+               
             classAttributes.AddRange(methodAttributes);
             classAttributes.Add(new ExceptionLogAspect(typeof(FileLogger)));
 
