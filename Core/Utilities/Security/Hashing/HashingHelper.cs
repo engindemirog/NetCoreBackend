@@ -21,7 +21,7 @@ namespace Core.Utilities.Security.Hashing
             using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
             {
                 var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
-                return computedHash.SequenceEqual(passwordHash) == true ? true : false;
+                return computedHash.SequenceEqual(passwordHash);
             }
         }
     }
